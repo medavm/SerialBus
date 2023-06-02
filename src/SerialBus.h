@@ -102,31 +102,31 @@ public:
 };
 
 
+#ifdef _SB_DEBUG
 
 #if defined(__AVR_ATmega328P__)
     #define _SB_DEBUG_OUTPUT_1_PIN 13
-
-    #include "AVR-imp.h"
-
 #elif defined(__AVR_ATmega2560__)
     #define _SB_DEBUG_OUTPUT_1_PIN 10
-
-    #include "AVR-imp.h"
-
 #elif defined(__AVR_ATtiny88__)
     #define _SB_DEBUG_OUTPUT_1_PIN 10
-
-    #include "AVR-imp.h"
-
 #elif defined(__AVR_ATtiny85__)
     #define _SB_DEBUG_OUTPUT_1_PIN 1
-
-    #include "AVR-imp.h"
-
 #else
-    #error "No compatible controller defined?"
+    #error "MISSING DEBUG PIN"
+#endif
+
 #endif
 
 
+
+#ifdef ARDUINO_ARCH_AVR
+    #include "AVR-imp.h"
+
+#elif ARDUINO_XXXX_ARCH
+    //todo
+#else
+    #error "Not compatible controller?"
+#endif
 
 #include "SerialBus-imp.h"
