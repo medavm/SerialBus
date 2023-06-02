@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 
@@ -71,3 +72,7 @@ In rest the bus is held at *HIGH* level and a message consist of the following:
 - DATA (8 bit) - Byte of data.
 - STOP (1 bit)- If oposite from previous data bit indicates another data byte is going to be transmitted; if equals to previous data bit, no more data is going to be transmitted. This way we guarantee the pin changes state at least once for every byte sent, helps to keep the receivers synced with the broadcaster timing. 
 
+=======
+# SerialBus
+Serial-like communication between microcontrollers for Arduino that only needs one wire.
+>>>>>>> 53e74c80188d574d0aee390efcf8e10f48852414
