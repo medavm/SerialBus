@@ -17,12 +17,13 @@ This is an Arduino library that implements **serial-like protocol** to allow **c
 #### Compatibility:
 
 
-Board                | Pins  | Other
-------------------- | ---------- | -------
-Uno    | D2 to D7 | Uses Timer 0 Compare A and PCINT2
-Mega       | D8 to D15 | Uses Timer 0 Compare A and PCINT2
-ESP8266  | todo |
-ESP32   | todo |\
+Board       |       Pins        |       Other
+------------|-------------------|---------------------
+Uno         | D2 to D7          |   Uses Timer 0 Compare A and PCINT2
+Mega        | D8 to D15         |   Uses Timer 0 Compare A and PCINT2
+ATtinyXX    |                   |   Uses Timer 0 Compare A and PCINT0/PCINT2
+
+
 
 <br>
 
