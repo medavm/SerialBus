@@ -1,25 +1,20 @@
 
-
-
 /**
+ * A quick explanation... Uses the hardware timer and pcint to bit bang a simple serial-like protocol:
  * 
- * Communication follows the following protocol:
+ * ...[REST] --> [START] --> [SRC ADDR] --> [STOP] --> [DATA 0] ... [DATA N] --> [STOP] --> [REST]...
  * 
- * [...REST STATE] [START BIT] [DEVICE ADDR] [STOP BIT] [DATA BYTE 0] [STOP BIT] ... [DATA BYTE N] [STOP BIT] [..REST STATE...]
- *
- * REST STATE -> Bus is held at HIGH level.
- * START BIT -> Bus goes LOW for 1 bit length
- * DEVICE ADDR -> First byte transmitted is the source device address. This is used to solve collisions if two devices start trasmitting at the same time
- * STOP BIT -> No data has been sent yet so this one is always the opposite from previous transmitted bit (see bellow)
- * DATA BYTE N -> The data.
- * STOP BIT -> Must be opposite to previous trasnmitted bit if broadcasting device intents to coninue sending data. This way garantees at least one pcint
- * for every byte sent, used to keep the receivers stay synced with the transmitter timming. If this bit is equal to previous bit no more data is
- * going to be sent and the bus should be released to HIGH state next bit.
- * 
+ * REST -> Bus help at HIGH state.
+ * START -> The broadcasting device pulls the bus LOW for 1 bit length.
+ * SRC ADDR -> 8 bits contaning the broadcaster device address, this is used to solve collosions.
+ * STOP -> 1 bit. This bit has no real propose but is here to simplify the code.
+ * DATA -> 8 bits, byte of actually data payload
+ * STOP -> 1 bit. If this is oposite from the previous bit of data indicates another byte of data is going to be transmited. If equals to previous data bit
+ * means no more data is comming, signs the end of transmission and the bus should be released and at HIGH state next bit. Doing it this way we guarantee a pcint 
+ * at least once for every byte sent, helping to keep the receivers synced with the broadcaster timing.
  * 
  * 
- */
-
+*/
 
 
 

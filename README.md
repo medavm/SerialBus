@@ -58,20 +58,6 @@ SerialBus _serialBus(4, 1, true)
 [Button led control](https://github.com/jgvmonteiro/SerialBus/tree/main/examples/led_control)
 
 [Use different logic levels controllers (esp32 and Uno)](https://github.com/jgvmonteiro/SerialBus/tree/main/examples/nano_to_esp32)
-
-
-## How it works?
-
-A quick explanation... Uses the hardware timer paired with bit bagging to create a transmission protocol. Pin change interrupts are also used to detect the start of a transmission and to keep the receivers synced.
-
-In rest the bus is held at *HIGH* level and a message consist of the following:
-
-    START(1) -> ADDR(8) -> STOP*(1) -> DATA 0(8) -> STOP(1) -> ... -> DATA N(8) -> STOP(1)
-
-- START (1 bit) -> To start the transmission, bus gets pulled *LOW* for 1 bit length.
-- ADDR (8 bit) -> The broadcasting device address, this used to solve collisions.
-- STOP* (1 bit)  -> This bit has actually no real propose but is here to simplify the code.
-- DATA (8 bit) - Byte of data.
-- STOP (1 bit)- If oposite from previous data bit indicates another data byte is going to be transmitted; if equals to previous data bit, no more data is going to be transmitted. This way we guarantee the pin changes state at least once for every byte sent, helps to keep the receivers synced with the broadcaster timing. 
+ 
 
 
