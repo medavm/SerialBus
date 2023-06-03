@@ -36,7 +36,7 @@ SerialBus* _sb_isr_cb_obj;
 SerialBus::SerialBus(uint8_t unique_device_addr, uint8_t pin, uint8_t pullup)
 {
     _deviceaddr = unique_device_addr;
-    _rxtxPin = pin;
+    _rxtxpin = pin;
     _usepull = pullup;
     _sb_isr_cb_obj = this;
 }

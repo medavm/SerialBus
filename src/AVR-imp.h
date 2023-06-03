@@ -84,15 +84,15 @@ int SerialBus::hwInit()
 
     if(_usepull)
     {
-        pinMode(_rxtxPin, INPUT_PULLUP);    
+        pinMode(_rxtxpin, INPUT_PULLUP);    
     }
     else
     {
-        pinMode(_rxtxPin, INPUT);
+        pinMode(_rxtxpin, INPUT);
     }
 
-    uint8_t port = digitalPinToPort(_rxtxPin);
-    _sb_bitmask = digitalPinToBitMask(_rxtxPin);
+    uint8_t port = digitalPinToPort(_rxtxpin);
+    _sb_bitmask = digitalPinToBitMask(_rxtxpin);
     _sb_portmode = portModeRegister(port);
     _sb_portinput = portInputRegister(port);
     _sb_portoutput = portOutputRegister(port);
@@ -132,16 +132,16 @@ void SerialBus::timerIntOffset(int offset_us)
 void SerialBus::pcIntEnable()
 {
 
-    *digitalPinToPCICR(_rxtxPin) |= _BV(digitalPinToPCICRbit(_rxtxPin));
-    *digitalPinToPCMSK(_rxtxPin) |= _BV(digitalPinToPCMSKbit(_rxtxPin));
+    *digitalPinToPCICR(_rxtxpin) |= _BV(digitalPinToPCICRbit(_rxtxpin));
+    *digitalPinToPCMSK(_rxtxpin) |= _BV(digitalPinToPCMSKbit(_rxtxpin));
     
 }
 
 void SerialBus::pcIntDisable()
 {
 
-    *digitalPinToPCICR(_rxtxPin) &= ~_BV(digitalPinToPCICRbit(_rxtxPin));
-    *digitalPinToPCMSK(_rxtxPin) &= ~_BV(digitalPinToPCMSKbit(_rxtxPin));
+    *digitalPinToPCICR(_rxtxpin) &= ~_BV(digitalPinToPCICRbit(_rxtxpin));
+    *digitalPinToPCMSK(_rxtxpin) &= ~_BV(digitalPinToPCMSKbit(_rxtxpin));
 }
 
 void SerialBus::busWrite(uint8_t bit)

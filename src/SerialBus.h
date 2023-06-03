@@ -13,7 +13,7 @@
 
 #define _SB_ 0x01
 #define _SB_VERSION 0.1
-// #define _SB_DEBUG 1
+#define _SB_DEBUG 1
 
 
 
@@ -42,7 +42,7 @@ class SerialBus : public Stream
 private:
 
     uint8_t _deviceaddr = 0;
-    uint8_t _rxtxPin = 0;
+    uint8_t _rxtxpin = 0;
     uint8_t _usepull = 0;
     int _baudrate = _SB_BAUD_DEFAULT;
 
@@ -112,6 +112,10 @@ public:
     #define _SB_DEBUG_OUTPUT_1_PIN 10
 #elif defined(__AVR_ATtiny85__)
     #define _SB_DEBUG_OUTPUT_1_PIN 1
+#elif defined(ESP32)
+    #define _SB_DEBUG_OUTPUT_1_PIN 2
+#elif defined(ESP8266)
+    #define _SB_DEBUG_OUTPUT_1_PIN 4
 #else
     #error "MISSING DEBUG PIN"
 #endif
@@ -122,9 +126,10 @@ public:
 
 #ifdef ARDUINO_ARCH_AVR
     #include "AVR-imp.h"
-
-#elif ARDUINO_XXXX_ARCH
-    //todo
+#elif ARDUINO_ARCH_ESP8266
+    #include "ESP8266-imp.h"
+#elif ARDUINO_ARCH_ESP32
+    #include "ESP32-imp.h"
 #else
     #error "Not compatible controller?"
 #endif

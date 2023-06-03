@@ -22,8 +22,8 @@ Board       |       Pins        |       Other
 Uno         | D2 to D7          |   Uses Timer 0 Compare A and PCINT2
 Mega        | D8 to D15         |   Uses Timer 0 Compare A and PCINT2
 ATtinyXX    |                   |   Uses Timer 0 Compare A and PCINT0/PCINT2
-
-
+ESP8266     | ALL GPIO          |   Uses Timer 1
+ESP32       | ALL GPIO          |   Uses Timer 3
 
 <br>
 
