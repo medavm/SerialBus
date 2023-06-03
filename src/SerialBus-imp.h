@@ -2,16 +2,17 @@
 /**
  * A quick explanation... Uses the hardware timer and pcint to bit bang a simple serial-like protocol:
  * 
- * ...[REST] --> [START] --> [SRC ADDR] --> [STOP] --> [DATA 0] ... [DATA N] --> [STOP] --> [REST]...
+ * ...[REST] --> [START] --> [SRC ADDR] --> [STOP*] --> [DATA 0] ... [DATA N] --> [STOP] --> [REST]...
  * 
  * REST -> Bus help at HIGH state.
  * START -> The broadcasting device pulls the bus LOW for 1 bit length.
  * SRC ADDR -> 8 bits contaning the broadcaster device address, this is used to solve collosions.
- * STOP -> 1 bit. This bit has no real propose but is here to simplify the code.
+ * STOP* -> 1 bit. This bit has no real propose but is here to simplify the code.
  * DATA -> 8 bits, byte of actually data payload
  * STOP -> 1 bit. If this is oposite from the previous bit of data indicates another byte of data is going to be transmited. If equals to previous data bit
  * means no more data is comming, signs the end of transmission and the bus should be released and at HIGH state next bit. Doing it this way we guarantee a pcint 
  * at least once for every byte sent, helping to keep the receivers synced with the broadcaster timing.
+ * 
  * 
  * 
 */
@@ -85,7 +86,7 @@ void SerialBus::__isr_timer()
                 _datacounter++;
             }
 
-            //Set next bit and load next byte to buffer
+            //Sets next bit and load next byte to buffer
             else
             {
                 if (_databufpos == 0) 
@@ -197,8 +198,8 @@ void SerialBus::__isr_timer()
 
         if(_edge)
         {
-            //If busRead()==0 but its not already in receive mode, means other device just started transming!? We do nothing cause shoud have a pcint 
-            // ready that will put us into receive mode
+            //If busRead()==0 but we not yet in receive mode, means other device just started transming!? We do nothing 'cause shoud have a pcint 
+            // ready to put us into receive mode
             if(_txcbuffer.available() && busRead() && micros() - _lasttx_us > _timerinterval_us * 2 *  _SB_FRAME_INTERVAL)
             {
                 pcIntDisable(); //TODO: clear pending int flag?
@@ -235,7 +236,7 @@ void SerialBus::__isr_timer()
 void SerialBus::__isr_pcint()
 {
 
-    //Record every pin change. Useful to sync interrupt timming in the timer isr
+    //Record every pin change. Used to sync interrupt timing in the timer isr
     if (_mode == _SB_MODE_RX && _databufpos != _SB_DATA_POS_STOP) //
     {
         _lastpinchange_us = micros();

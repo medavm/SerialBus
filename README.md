@@ -22,7 +22,7 @@ Board       |       Pins        |       Other
 Uno         | D2 to D7          |   Uses Timer 0 Compare A and PCINT2
 Mega        | D8 to D15         |   Uses Timer 0 Compare A and PCINT2
 ATtinyXX    |                   |   Uses Timer 0 Compare A and PCINT0/PCINT2
-ESP8266     | ALL GPIO          |   Uses Timer 1
+ESP8266     | ALL GPIO?         |   Uses Timer 1
 ESP32       | ALL GPIO          |   Uses Timer 3
 
 <br>
@@ -49,7 +49,7 @@ This is a [Stream](https://reference.arduino.cc/reference/en/language/functions/
 4 is the pin where the bus wire is connected
 true enables internal pullups
 */
-SerialBus _serialBus(4, 1, true)
+SerialBus _serialBus(4, 1, true);
 ```
 
 #### Examples
