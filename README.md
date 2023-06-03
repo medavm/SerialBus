@@ -41,7 +41,7 @@ Just download the *.zip* file go to your Arduino project and import the library 
 This is a [Stream](https://reference.arduino.cc/reference/en/language/functions/communication/stream/) library so will work just like [Serial](https://reference.arduino.cc/reference/en/language/functions/communication/serial/). The main diference is the need to create the **SerialBus** object which has **tree arguments**:
 - The **device address**, a number from **1 to 127** that is **unique** to every device.
 - The **pin** where the bus wire is connected.
-- Whether to use the controller **internall pullups** resistors . You can disable internal-pullups to connect different logic level mcus.
+- Whether to use the controller **internall pullups** resistors . You can disable internal-pullups to connect different logic level mcus, example below.
 
 ```
 /*
@@ -53,9 +53,11 @@ SerialBus _serialBus(4, 1, true)
 ```
 
 #### Examples
-[Basic broadcaster and receiver](http://example.com)
+[Basic broadcaster and receiver](https://github.com/jgvmonteiro/SerialBus/tree/main/examples/send_receive_msg)
 
-[Button led control](http://example.com)
+[Button led control](https://github.com/jgvmonteiro/SerialBus/tree/main/examples/led_control)
+
+[Use different logic levels controllers (esp32 and Uno)](https://github.com/jgvmonteiro/SerialBus/tree/main/examples/nano_to_esp32)
 
 
 ## How it works?

@@ -1,24 +1,23 @@
-#include "/home/mont/Documents/PlatformIO/Projects/WireBus/WireBus/src/WireBus.h"
+#include <SerialBus.h>
 
 
-//#include <WireBus.h>
+#define DEVICE_ADDR 10//this device address
+#define PIN_TXRX 4
+#define USE_INTERNAL_PULLUP true //enable internal pullup resistor
 
-
-#define PIN_NUM 4 //D2 to D7 on Uno/Nano 
-#define DEVICE_ADDR 1 //Device address must be unique to every device on the bus! (Range 0 to 255)
-WireBus _wirebus(DEVICE_ADDR, PIN_NUM);
+SerialBus sb(DEVICE_ADDR, PIN_TXRX, USE_INTERNAL_PULLUP);
 
 void setup()
 {
 	// put your setup code here, to run once:
 
-	Serial.begin(9600); //Select desire uart baud rate
+	Serial.begin(9600);
 	Serial.println("");
 	delay(100);
 	
-	while(!_wirebus.begin()) //Starts WireBus at 1000 baud and uses controller internal PULLUP
+	while(!sb.begin())
 	{
-		Serial.println("Wirebus begin() failed.");
+		Serial.println("SerialBus begin() failed.");
 		delay(1000);
 	}
 
@@ -30,19 +29,19 @@ void loop()
 	// put your main code here, to run repeatedly:
 
 	static uint32_t lastMsg;
-	if(millis() - lastMsg > 1000) //sends message every 2s
+	if(millis() - lastMsg > 1000) //Send message every 1000ms
 	{
-		_wirebus.println("Msg sent from controller "+String(DEVICE_ADDR) + "!");
+		sb.println("Msg sent from controller "+String(DEVICE_ADDR) + "!");
 		lastMsg = millis();
 	}
 	
 	
-	if(_wirebus.available())
+	if(sb.available())
 	{
-		while (_wirebus.available())
+		while (sb.available())
 		{
-			int c = _wirebus.read();
-			Serial.print((char)c); //Prints data received through wirebus
+			int c = sb.read();
+			Serial.print((char)c); 
 		}
 	}
 

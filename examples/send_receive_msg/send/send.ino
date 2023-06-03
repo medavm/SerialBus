@@ -1,11 +1,6 @@
 #include <SerialBus.h>
 
 
-#ifdef ARDUINO_ARCH_AVR
-    #inclugde "AVR-imp.h"
-#endif
-
-
 #define DEVICE_ADDR 1 //this device address
 #define PIN_TXRX 4
 #define USE_INTERNAL_PULLUP true //enable internal pullup resistor

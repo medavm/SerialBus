@@ -1,5 +1,6 @@
 #include <SerialBus.h>
 
+
 #define DEVICE_ADDR 2//this device address
 #define PIN_TXRX 4
 #define USE_INTERNAL_PULLUP true //enable internal pullup resistor
@@ -24,6 +25,6 @@ void loop(){
       Serial.print((char)c);
     }
 
-    delay(100);
+    delay(10);
 
 }

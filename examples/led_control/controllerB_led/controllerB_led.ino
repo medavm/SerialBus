@@ -1,24 +1,24 @@
-#include "/home/mont/Documents/PlatformIO/Projects/WireBus/WireBus/src/WireBus.h"
+#include <SerialBus.h>
 
 
-#define PIN_LED 13
+#define DEVICE_ADDR 10//this device address
+#define PIN_TXRX 4
+#define USE_INTERNAL_PULLUP true //enable internal pullup resistor
 
+SerialBus sb(DEVICE_ADDR, PIN_TXRX, USE_INTERNAL_PULLUP);
 
-#define PIN_NUM 4 //D2 to D7 on Uno/Nano 
-#define DEVICE_ADDR 22 //Device address must be unique to every device on the bus! (Range 0 to 255)
-WireBus _wirebus(DEVICE_ADDR, PIN_NUM);
 
 void setup()
 {
 	// put your setup code here, to run once:
 	
-	pinMode(PIN_LED, OUTPUT);
+	pinMode(LED_BUILTIN, OUTPUT);
 
 	Serial.begin(9600);	
 
-	while(!_wirebus.begin(1000, true)) //1000 baud with internal pullup
+	while(!sb.begin()) //1000 baud with internal pullup
 	{
-		Serial.println("Wirebus begin() failed.");
+		Serial.println("SerialBus begin() failed.");
 		delay(1000);
 	}
 
@@ -28,8 +28,8 @@ void loop()
 {
 	// put your main code here, to run repeatedly:
 
-  int buttonPressed = _wirebus.read();
-	digitalWrite(PIN_LED, buttonPressed);
+  int buttonPressed = sb.read();
+	digitalWrite(LED_BUILTIN, buttonPressed);
 	delay(100);
 
 }
