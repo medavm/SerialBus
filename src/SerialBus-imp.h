@@ -1,12 +1,15 @@
 
 /**
+ * 
+ * 
+ * 
  * A quick explanation... Uses the hardware timer and pcint to bit bang a simple serial-like protocol:
  * 
  * ...[REST] --> [START] --> [SRC ADDR] --> [STOP*] --> [DATA 0] ... [DATA N] --> [STOP] --> [REST]...
  * 
  * REST -> Bus help at HIGH state.
  * START -> The broadcasting device pulls the bus LOW for 1 bit length.
- * SRC ADDR -> 8 bits contaning the broadcaster device address, this is used to solve collosions.
+ * SRC ADDR -> 8 bits contaning the broadcaster device address, this is used to solve collisions.
  * STOP* -> 1 bit. This bit has no real propose but is here to simplify the code.
  * DATA -> 8 bits, byte of actually data payload
  * STOP -> 1 bit. If this is oposite from the previous bit of data indicates another byte of data is going to be transmited. If equals to previous data bit
@@ -362,7 +365,7 @@ size_t SerialBus::write(uint8_t b)
         return 0;
     }
 
-    timerIntStart(_timerinterval_us, false);  //false -> if already running does nothing
+    timerIntStart(_timerinterval_us, false);
        
     return 1;
 }
