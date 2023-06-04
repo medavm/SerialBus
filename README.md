@@ -8,7 +8,7 @@ This is an Arduino library that implements a **serial-like communication** betwe
 - **No external hardware** needed, just one wire.
 - Can connect **different logic levels MCUs**  by managing the pullups.
 - There is **no master** and **no packets**, a device writes a **continuous stream of bytes** until a stop bit. 
-- All devices have an **unique** address assigned, used to resolve collisions.
+- All devices have an **unique** address assigned, just used to resolve collisions.
 - **Every message is broadcasted** and all devices in the bus receive it. 
 - Up to **5000 baud** (to go higher external pullups may be needed).*
 
@@ -44,14 +44,7 @@ This is a [Stream](https://reference.arduino.cc/reference/en/language/functions/
 - The **pin** where the bus wire is connected.
 - Whether to use the controller **internall pullups** resistors . You can disable internal-pullups to connect different logic level mcus, example below.
 
-```
-/*
-1 is the device address
-4 is the pin where the bus wire is connected
-true enables internal pullups
-*/
-SerialBus _serialBus(4, 1, true);
-```
+
 
 #### Examples
 [Basic broadcaster and receiver](https://github.com/jgvmonteiro/SerialBus/tree/main/examples/send_receive_msg)
