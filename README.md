@@ -2,7 +2,7 @@
 
 
 ## SerialBus
-This is an Arduino library that implements a **serial-like communication** between microcontrollers using **one single wire** as bus. 
+This is an Arduino library that implements a **serial-like communication** between microcontrollers using **one single wire** (and a common ground) as bus. 
 
 #### More
 - **No external hardware** needed, just one wire.
