@@ -130,6 +130,8 @@ public:
     #include "ESP8266-imp.h"
 #elif ARDUINO_ARCH_ESP32
     #include "ESP32-imp.h"
+#elif ARDUINO_ARCH_STM32
+    #include "STM32-imp.h"
 #else
     #error "Not compatible controller?"
 #endif
