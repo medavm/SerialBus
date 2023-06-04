@@ -12,7 +12,7 @@
 
 
 #define _SB_ 0x01
-#define _SB_VERSION 0.1
+#define _SB_VERSION 0.2
 // #define _SB_DEBUG 1
 
 
